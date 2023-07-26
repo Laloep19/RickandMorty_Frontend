@@ -81,7 +81,7 @@ function App() {
     // setStatus(items_status.data);
     setLoading(true);
     } 
-    data.sort((x,y) => x.id-y.id);
+    // data.sort((x,y) => x.id-y.id);
   useEffect(()=>{
     fetchdata();
   },[]);
