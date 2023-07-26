@@ -42,10 +42,11 @@ const theme = createTheme({
   }
 });
 function App() {
-  const [data, setData]=useState([])
-  const [state, setState]=useState('')
-  const [state2, setState2]=useState('')
-  const [status, setStatus]=useState([])
+  const api = 'rickandmortybackend-production.up.railway.app';
+  const [data, setData]=useState([]);
+  const [state, setState]=useState('');
+  const [state2, setState2]=useState('');
+  const [status, setStatus]=useState([]);
   const handleStatus = (e) => {
     setState(e.target.value);
   };
@@ -64,9 +65,9 @@ function App() {
   const [loading, setLoading]=useState(false)
   async function fetchdata(){
     await Axios.all([
-        Axios.get(`http://localhost:3000/characters`),
-        Axios.get(`http://localhost:3000/gender`),
-        Axios.get(`http://localhost:3000/status`),
+        Axios.get(`${api}/characters`),
+        Axios.get(`${api}/gender`),
+        Axios.get(`${api}/status`),
       ]).then(response => {
         setData(response[0].data);
         setGenders(response[1].data);
@@ -74,10 +75,10 @@ function App() {
       }).catch(err => console.log(err));
     
     // const items_genders = await axios
-    // .get('http://localhost:3000/gender');
+    // .get('${api}/gender');
     // setGenders(items_genders.data);
     // const items_status = await axios
-    // .get('http://localhost:3000/status');
+    // .get('${api}/status');
     // setStatus(items_status.data);
     setLoading(true);
     } 
@@ -115,25 +116,25 @@ function App() {
   }
   async function post(){
     getForm();
-    await Axios.post('http://localhost:3000/characters',character)
+    await Axios.post('${api}/characters',character)
     .then(response => console.log(response))
     .catch(err => console.log(err))
   }
   async function patch(){
     getForm2();
-    await Axios.patch('http://localhost:3000/characters/'+name,patch_ch)
+    await Axios.patch('${api}/characters/'+name,patch_ch)
     .then(response => console.log(response))
     .catch(err => console.log(err))
   }
   const [characterId, setCharacterId]=useState('')
   const [active, setActive]=useState(false)
   async function deleteCh(){
-    await Axios.delete('http://localhost:3000/characters/'+name)
+    await Axios.delete('${api}/characters/'+name)
     .then(response => console.log(response))
     .catch(err => console.log(err))
   }
   async function getId(){
-    const response=await Axios.get('http://localhost:3000/characters/'+name);
+    const response=await Axios.get('${api}/characters/'+name);
     setCharacterId(response.data); 
     document.getElementById("name2").value= response.data.name;
     patch_ch.species=document.getElementById("specie2").value=response.data.species;
