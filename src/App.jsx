@@ -81,18 +81,19 @@ function App() {
     // setStatus(items_status.data);
     setLoading(true);
     } 
-    // data.sort((x,y) => x.id-y.id);
+    data.sort((x,y) => x.id-y.id);
   useEffect(()=>{
     fetchdata();
   },[]);
   let names = [];
-  data.forEach(e => {
-      let object = new Object({
-          id: e.id,
-          name: e.name
-      });
-      names.push(object);
-  })
+  
+  // data.forEach(e => {
+  //     let object = new Object({
+  //         id: e.id,
+  //         name: e.name
+  //     });
+  //   names.push(object);
+  // })
   const [name, setName]=useState('')
   const handleName = (e) => {
     setName(e.target.value);
