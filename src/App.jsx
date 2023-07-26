@@ -1,10 +1,20 @@
 import './App.css'
 import * as React from 'react';
-import { Box, Button, Stack, Grid, TextField, createTheme } from '@mui/material';
+import {
+  Box, 
+  Button, 
+  Stack, 
+  Grid, 
+  TextField,
+  createTheme,
+  Typography,
+  } from '@mui/material';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Axios from 'axios';
 import { ThemeProvider } from '@emotion/react';
+import CardCharacter from './components/CardCharacter';
+import Combobox from './components/Combobox';
 
 const theme = createTheme({
   components:{
