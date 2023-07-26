@@ -64,9 +64,9 @@ function App() {
   const [loading, setLoading]=useState(false)
   async function fetchdata(){
     await Axios.all([
-        Axios.get(`rickandmortybackend-production.up.railway.app/characters`),
-        Axios.get(`rickandmortybackend-production.up.railway.app/gender`),
-        Axios.get(`rickandmortybackend-production.up.railway.app/status`),
+        Axios.get(`https://rickandmortybackend-production.up.railway.app/characters`),
+        Axios.get(`https://rickandmortybackend-production.up.railway.app/gender`),
+        Axios.get(`https://rickandmortybackend-production.up.railway.app/status`),
       ]).then(response => {
         setData(response[0].data);
         setGenders(response[1].data);
@@ -74,26 +74,26 @@ function App() {
       }).catch(err => console.log(err));
     
     // const items_genders = await axios
-    // .get('rickandmortybackend-production.up.railway.app/gender');
+    // .get('https://rickandmortybackend-production.up.railway.app/gender');
     // setGenders(items_genders.data);
     // const items_status = await axios
-    // .get('rickandmortybackend-production.up.railway.app/status');
+    // .get('https://rickandmortybackend-production.up.railway.app/status');
     // setStatus(items_status.data);
     setLoading(true);
     } 
-    // data.sort((x,y) => x.id-y.id);
+    data.sort((x,y) => x.id-y.id);
   useEffect(()=>{
     fetchdata();
   },[]);
   let names = [];
   
-  // data.forEach(e => {
-  //     let object = new Object({
-  //         id: e.id,
-  //         name: e.name
-  //     });
-  //   names.push(object);
-  // })
+  data.forEach(e => {
+      let object = new Object({
+          id: e.id,
+          name: e.name
+      });
+    names.push(object);
+  })
   const [name, setName]=useState('')
   const handleName = (e) => {
     setName(e.target.value);
@@ -116,25 +116,25 @@ function App() {
   }
   async function post(){
     getForm();
-    await Axios.post('rickandmortybackend-production.up.railway.app/characters',character)
+    await Axios.post('https://rickandmortybackend-production.up.railway.app/characters',character)
     .then(response => console.log(response))
     .catch(err => console.log(err))
   }
   async function patch(){
     getForm2();
-    await Axios.patch('rickandmortybackend-production.up.railway.app/characters/'+name,patch_ch)
+    await Axios.patch('https://rickandmortybackend-production.up.railway.app/characters/'+name,patch_ch)
     .then(response => console.log(response))
     .catch(err => console.log(err))
   }
   const [characterId, setCharacterId]=useState('')
   const [active, setActive]=useState(false)
   async function deleteCh(){
-    await Axios.delete('rickandmortybackend-production.up.railway.app/characters/'+name)
+    await Axios.delete('https://rickandmortybackend-production.up.railway.app/characters/'+name)
     .then(response => console.log(response))
     .catch(err => console.log(err))
   }
   async function getId(){
-    const response=await Axios.get('rickandmortybackend-production.up.railway.app/characters/'+name);
+    const response=await Axios.get('https://rickandmortybackend-production.up.railway.app/characters/'+name);
     setCharacterId(response.data); 
     document.getElementById("name2").value= response.data.name;
     patch_ch.species=document.getElementById("specie2").value=response.data.species;
